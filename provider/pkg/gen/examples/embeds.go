@@ -12,25 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main
+package examples
 
-import (
+// Needed to support go:embed directive
+import _ "embed"
 
-	"github.com/pulumi/pulumi-xyz/provider/pkg/provider"
-)
+//go:embed service.md
+var service string
 
-var providerName = "xyz"
-
-//go:embed schema.json
-var pulumiSchema []byte
-
-//go:embed openapi_generated.yml
-var openapiDocBytes []byte
-
-//go:embed metadata.json
-var metadataBytes []byte
-
-// Serve the provider against Pulumi's Provider protocol.
-func main() {
-	provider.Serve(providerName, version.Version, pulumiSchema, openapiDocBytes, metadataBytes)
+// ResourceExample contains Markdown-formatted examples
+// corresponding to a resource's type token.
+var ResourceExample = map[string]string{
+	"xyz": service,
 }

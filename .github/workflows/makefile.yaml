@@ -2,14 +2,15 @@ name: Makefile
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-    - main
-  pull_request:
-    branches:
-    - main
-  schedule:
-    - cron: '0 0 * * *'
+  # TODO: Uncomment when your provider is ready.
+  # push:
+  #   branches:
+  #   - main
+  # pull_request:
+  #   branches:
+  #   - main
+  # schedule:
+  #   - cron: '0 0 * * *'
 
 jobs:
   build:

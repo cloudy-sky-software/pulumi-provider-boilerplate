@@ -1,4 +1,4 @@
-// Copyright 2022-2024, Cloudy Sky Software LLC.
+// Copyright 2016-2024, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,25 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main
+package version
 
-import (
-
-	"github.com/pulumi/pulumi-xyz/provider/pkg/provider"
-)
-
-var providerName = "xyz"
-
-//go:embed schema.json
-var pulumiSchema []byte
-
-//go:embed openapi_generated.yml
-var openapiDocBytes []byte
-
-//go:embed metadata.json
-var metadataBytes []byte
-
-// Serve the provider against Pulumi's Provider protocol.
-func main() {
-	provider.Serve(providerName, version.Version, pulumiSchema, openapiDocBytes, metadataBytes)
-}
+// Version is initialized by the Go linker to contain the semver of this build.
+var Version = "0.0.1"

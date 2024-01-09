@@ -12,25 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main
+package gen
 
 import (
+	"os"
+	"path/filepath"
+	"testing"
 
-	"github.com/pulumi/pulumi-xyz/provider/pkg/provider"
+	"github.com/cloudy-sky-software/pulumi-xyz/provider/pkg/openapi"
 )
 
-var providerName = "xyz"
+func TestPulumiSchema(t *testing.T) {
+	b, err := os.ReadFile(filepath.Join("..", "..", "cmd", "pulumi-gen-xyz", "openapi.yml"))
+	if err != nil {
+		t.Fatalf("Failed reading openapi.yml: %v", err)
+	}
 
-//go:embed schema.json
-var pulumiSchema []byte
+	oaSpec := openapi.GetOpenAPISpec(b)
 
-//go:embed openapi_generated.yml
-var openapiDocBytes []byte
-
-//go:embed metadata.json
-var metadataBytes []byte
-
-// Serve the provider against Pulumi's Provider protocol.
-func main() {
-	provider.Serve(providerName, version.Version, pulumiSchema, openapiDocBytes, metadataBytes)
+	PulumiSchema(*oaSpec)
 }

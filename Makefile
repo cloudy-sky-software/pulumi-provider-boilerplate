@@ -2,15 +2,19 @@ PROJECT_NAME := Pulumi Xyz Resource Provider
 
 PACK             := xyz
 PACKDIR          := sdk
-PROJECT          := github.com/pulumi/pulumi-xyz
+PROJECT          := github.com/cloudy-sky-software/pulumi-xyz
+# TODO: If you are publishing the provider on public registries, you should change the owner
+# for the package.
 NODE_MODULE_NAME := @pulumi/xyz
 NUGET_PKG_NAME   := Pulumi.Xyz
 
 PROVIDER        := pulumi-resource-${PACK}
+CODEGEN         := pulumi-gen-${PACK}
 VERSION         ?= $(shell pulumictl get version)
 PROVIDER_PATH   := provider
-VERSION_PATH    := ${PROVIDER_PATH}.Version
+VERSION_PATH    := ${PROVIDER_PATH}/pkg/version.Version
 
+SCHEMA_FILE     := provider/cmd/pulumi-resource-xyz/schema.json
 GOPATH			:= $(shell go env GOPATH)
 
 WORKING_DIR     := $(shell pwd)
@@ -21,6 +25,14 @@ ensure::
 	cd provider && go mod tidy
 	cd sdk && go mod tidy
 	cd tests && go mod tidy
+
+gen::
+	(cd provider && go build -o $(WORKING_DIR)/bin/${CODEGEN} -ldflags "-X ${PROJECT}/${VERSION_PATH}=${VERSION}" ${PROJECT}/${PROVIDER_PATH}/cmd/$(CODEGEN))
+
+generate_schema:: gen
+	echo "Generating Pulumi schema..."
+	$(WORKING_DIR)/bin/$(CODEGEN) -v=3 --logtostderr schema $(SCHEMA_FILE) $(CURDIR)
+	echo "Finished generating schema."
 
 provider::
 	(cd provider && go build -o $(WORKING_DIR)/bin/${PROVIDER} -ldflags "-X ${PROJECT}/${VERSION_PATH}=${VERSION}" $(PROJECT)/${PROVIDER_PATH}/cmd/$(PROVIDER))

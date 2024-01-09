@@ -1,4 +1,4 @@
-module github.com/pulumi/pulumi-xyz/sdk
+module github.com/cloudy-sky-software/pulumi-xyz/sdk
 
 go 1.21
 

@@ -1,10 +1,11 @@
-module github.com/pulumi/pulumi-xyz/provider
+module github.com/cloudy-sky-software/pulumi-xyz/provider
 
 go 1.21
 
 require (
 	github.com/pulumi/pulumi-go-provider v0.11.1
-	github.com/pulumi/pulumi/sdk/v3 v3.79.0
+	github.com/pulumi/pulumi/sdk/v3 v3.100.0
+	github.com/getkin/kin-openapi/openapi3 v0.122.0
 )
 
 require (
