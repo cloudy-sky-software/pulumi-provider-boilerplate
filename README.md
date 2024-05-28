@@ -1,4 +1,4 @@
-🛑 **DEPRECATED: USE https://github.com/cloudy-sky-software/pulumi-provider-template INSTEAD. ** 🛑
+🛑 **DEPRECATED: USE https://github.com/cloudy-sky-software/pulumi-provider-template INSTEAD.** 🛑
 
 # Pulumi Native Provider Boilerplate
 
