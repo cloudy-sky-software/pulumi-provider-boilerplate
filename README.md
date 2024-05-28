@@ -1,3 +1,5 @@
+🛑 **DEPRECATED: USE https://github.com/cloudy-sky-software/pulumi-provider-template INSTEAD. ** 🛑
+
 # Pulumi Native Provider Boilerplate
 
 This repository is a boilerplate showing how to create and locally test a native Pulumi provider **generated from an OpenAPI 3.0 spec**.
